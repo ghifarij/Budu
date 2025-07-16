@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		FE5DB26C2E25ED9B006F7D6E /* Budu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Budu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE5DB26C2E25ED9B006F7D6E /* Budu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Budu.app; path = "/Users/afgaghifari/Projects/Learning/Budu/build/Debug-iphoneos/Budu.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				FE5DB26E2E25ED9B006F7D6E /* Budu */,
-				FE5DB26D2E25ED9B006F7D6E /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		FE5DB26D2E25ED9B006F7D6E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FE5DB26C2E25ED9B006F7D6E /* Budu.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = FE5DB2632E25ED9B006F7D6E;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = FE5DB26D2E25ED9B006F7D6E /* Products */;
+			productRefGroup = FE5DB2632E25ED9B006F7D6E;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
