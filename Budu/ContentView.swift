@@ -44,12 +44,15 @@ struct ContentView: View {
             .preferredColorScheme(.dark)
             .sheet(isPresented: $showingBudgetForm) {
                 BudgetFormView(budgetManager: budgetManager)
+                .presentationDragIndicator(.visible)
             }
             .sheet(isPresented: $showingExpenseForm) {
                 ExpenseFormView(budgetManager: budgetManager)
+                .presentationDragIndicator(.visible)
             }
             .sheet(isPresented: $showingHistory) {
                 HistoryView(budgetManager: budgetManager)
+                .presentationDragIndicator(.visible)
             }
         }
     }
@@ -86,7 +89,7 @@ struct ContentView: View {
             ZStack {
                 Color.gray.opacity(0.1)
                 LinearGradient(
-                    gradient: Gradient(colors:[Color.white.opacity(0.05), Color.blue.opacity(0.1)]),
+                    gradient: Gradient(colors:[Color.white.opacity(0.05), Color.blue.opacity(0.05)]),
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                 )
@@ -127,7 +130,8 @@ struct ContentView: View {
             Divider().background(Color.white.opacity(0.2))
             
             budgetInfoView(title: "Expenses",
-                           amount: budgetManager.totalExpenses)
+                           amount: budgetManager.totalExpenses,
+                           color: .red)
         }
         .padding(.horizontal)
         .background(Color.gray.opacity(0.1))

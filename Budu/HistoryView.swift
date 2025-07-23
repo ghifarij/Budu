@@ -24,14 +24,6 @@ struct HistoryView: View {
             .preferredColorScheme(.dark)
             .navigationTitle("This Month's History")
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                    .foregroundColor(.blue)
-                }
-            }
         }
     }
     

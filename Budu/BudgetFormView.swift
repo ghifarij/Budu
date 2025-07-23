@@ -39,26 +39,21 @@ struct BudgetFormView: View {
                 }
                 
                 Spacer()
-                
-                Button("Set Budget") {
-                    if let amount = Double(budgetText), amount > 0 {
-                        budgetManager.setBudget(amount)
-                        dismiss()
-                    }
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                .disabled(budgetText.isEmpty || Double(budgetText) == nil || Double(budgetText) ?? 0 <= 0)
             }
             .padding(24)
             .background(Color.black.ignoresSafeArea())
             .preferredColorScheme(.dark)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        if let amount = Double(budgetText), amount > 0 {
+                            budgetManager.setBudget(amount)
+                            dismiss()
+                        }
                     }
                     .foregroundColor(.blue)
+                    .disabled(budgetText.isEmpty || Double(budgetText) == nil || Double(budgetText) ?? 0 <= 0)
                 }
             }
             .onAppear {
