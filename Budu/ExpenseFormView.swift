@@ -48,7 +48,7 @@ struct ExpenseFormView: View {
                             .font(.headline)
                             .foregroundColor(.white)
                         
-                        TextField("Enter amount", text: $amountText)
+                        TextField("e.g., 50000", text: $amountText)
                             .keyboardType(.numberPad)
                             .textFieldStyle(CustomTextFieldStyle())
                             .focused($focusedField, equals: .amount)
@@ -56,26 +56,21 @@ struct ExpenseFormView: View {
                 }
                 
                 Spacer()
-                
-                Button("Add Expense") {
-                    if let amount = Double(amountText), amount > 0, !title.isEmpty {
-                        budgetManager.addExpense(title: title, amount: amount)
-                        dismiss()
-                    }
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                .disabled(title.isEmpty || amountText.isEmpty || Double(amountText) == nil || Double(amountText) ?? 0 <= 0)
             }
             .padding(24)
             .background(Color.black.ignoresSafeArea())
             .preferredColorScheme(.dark)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add") {
+                        if let amount = Double(amountText), amount > 0, !title.isEmpty {
+                            budgetManager.addExpense(title: title, amount: amount)
+                            dismiss()
+                        }
                     }
                     .foregroundColor(.blue)
+                    .disabled(title.isEmpty || amountText.isEmpty || Double(amountText) == nil || Double(amountText) ?? 0 <= 0)
                 }
             }
             .onAppear {
