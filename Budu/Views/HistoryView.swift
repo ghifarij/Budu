@@ -11,6 +11,10 @@ struct HistoryView: View {
     @ObservedObject var budgetManager: BudgetManager
     @Environment(\.dismiss) private var dismiss
     
+    private var sortedExpenses: [Expense] {
+        budgetManager.expenses.sorted(by: { $0.date > $1.date })
+    }
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
@@ -56,7 +60,13 @@ struct HistoryView: View {
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
             }
-            .onDelete(perform: budgetManager.deleteExpense)
+            .onDelete { indexSet in
+                let expensesToDelete = indexSet.map { sortedExpenses[$0] }
+                
+                for expense in expensesToDelete {
+                    budgetManager.delete(expense: expense)
+                }
+            }
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
