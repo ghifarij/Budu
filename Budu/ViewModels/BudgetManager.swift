@@ -45,9 +45,11 @@ class BudgetManager: ObservableObject {
         saveExpenses()
     }
     
-    func deleteExpense(at offsets: IndexSet) {
-        expenses.remove(atOffsets: offsets)
-        saveExpenses()
+    func delete(expense: Expense) {
+        if let index = expenses.firstIndex(where: { $0.id == expense.id }) {
+            expenses.remove(at: index)
+            saveExpenses()
+        }
     }
     
     // MARK: - Private Methods
