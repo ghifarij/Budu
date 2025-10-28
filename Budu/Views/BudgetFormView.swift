@@ -17,12 +17,12 @@ struct BudgetFormView: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Monthly Budget")
+                    Text("Budget")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     
-                    Text("Set your budget for this month")
+                    Text("Set your budget")
                         .font(.body)
                         .foregroundColor(.secondary)
                 }
