@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var showingBudgetForm = false
     @State private var showingExpenseForm = false
     @State private var showingHistory = false
+    @State private var showingResetAlert = false
 
     // MARK: - Body
     var body: some View {
@@ -42,6 +43,23 @@ struct ContentView: View {
                 .padding(.top, 40)
             }
             .preferredColorScheme(.dark)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Reset") {
+                        showingResetAlert = true
+                    }
+                    .tint(.red)
+                    .accessibilityLabel("Reset all data")
+                }
+            }
+            .alert("Reset All Data?", isPresented: $showingResetAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Reset", role: .destructive) {
+                    budgetManager.resetAll()
+                }
+            } message: {
+                Text("This clears your budget, expenses, and history.")
+            }
             .sheet(isPresented: $showingBudgetForm) {
                 BudgetFormView(budgetManager: budgetManager)
                 .presentationDragIndicator(.visible)

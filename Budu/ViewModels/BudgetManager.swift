@@ -17,7 +17,6 @@ class BudgetManager: ObservableObject {
     
     init() {
         loadData()
-        checkAndResetForNewMonth()
     }
     
     var availableBalance: Double {
@@ -52,6 +51,17 @@ class BudgetManager: ObservableObject {
         }
     }
     
+    /// Manually reset all budgeting data: budget, expenses, and stored history.
+    func resetAll() {
+        // Clear in-memory state
+        currentBudget = nil
+        expenses = []
+        
+        // Clear persisted data
+        UserDefaults.standard.removeObject(forKey: budgetKey)
+        UserDefaults.standard.removeObject(forKey: expensesKey)
+    }
+    
     // MARK: - Private Methods
     private func loadData() {
         loadBudget()
@@ -82,20 +92,6 @@ class BudgetManager: ObservableObject {
     private func saveExpenses() {
         if let data = try? JSONEncoder().encode(expenses) {
             UserDefaults.standard.set(data, forKey: expensesKey)
-        }
-    }
-    
-    private func checkAndResetForNewMonth() {
-        guard let budget = currentBudget else { return }
-        
-        if !budget.isCurrentMonth {
-            // Reset for new month
-            currentBudget = nil
-            expenses = []
-            
-            // Clear stored data
-            UserDefaults.standard.removeObject(forKey: budgetKey)
-            UserDefaults.standard.removeObject(forKey: expensesKey)
         }
     }
 }
