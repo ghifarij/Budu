@@ -26,7 +26,7 @@ struct HistoryView: View {
             }
             .background(Color.black.ignoresSafeArea())
             .preferredColorScheme(.dark)
-            .navigationTitle("This Month's History")
+            .navigationTitle("History")
             .navigationBarTitleDisplayMode(.large)
         }
     }
@@ -49,7 +49,7 @@ struct HistoryView: View {
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal, 24)
+        .padding(.horizontal)
     }
     
     @ViewBuilder
@@ -79,7 +79,7 @@ struct ExpenseRow: View {
     let expense: Expense
     
     var body: some View {
-        HStack(spacing: 16) {
+        HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(expense.title)
                     .font(.headline)
@@ -96,8 +96,7 @@ struct ExpenseRow: View {
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.red)
         }
-        .padding(.vertical, 12)
-        .padding(.horizontal, 16)
+        .padding()
         .background(
             Color.gray.opacity(0.1)
                 .cornerRadius(12)
@@ -121,4 +120,56 @@ struct ExpenseRow: View {
         formattedString = formattedString.replacingOccurrences(of: " ", with: "")
         return formattedString
     }
+}
+
+#Preview {
+    // Create a mock BudgetManager with sample data
+    let mockManager = BudgetManager()
+    
+    // Add sample expenses
+    let expenses = [
+        Expense(
+            id: UUID(),
+            title: "Batagor",
+            amount: 50000,
+            date: Date()
+        ),
+        Expense(
+            id: UUID(),
+            title: "Nasi Goreng",
+            amount: 35000,
+            date: Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        ),
+        Expense(
+            id: UUID(),
+            title: "Kopi Susu",
+            amount: 25000,
+            date: Calendar.current.date(byAdding: .day, value: -2, to: Date())!
+        ),
+        Expense(
+            id: UUID(),
+            title: "Bakso",
+            amount: 40000,
+            date: Calendar.current.date(byAdding: .day, value: -3, to: Date())!
+        ),
+        Expense(
+            id: UUID(),
+            title: "Es Teh Manis",
+            amount: 15000,
+            date: Calendar.current.date(byAdding: .day, value: -4, to: Date())!
+        )
+    ]
+    
+    // Add expenses to the mock manager
+    for expense in expenses {
+        mockManager.expenses.append(expense)
+    }
+    
+    return HistoryView(budgetManager: mockManager)
+}
+
+// Alternative: Preview for empty state
+#Preview("Empty State") {
+    let emptyManager = BudgetManager()
+    return HistoryView(budgetManager: emptyManager)
 }
