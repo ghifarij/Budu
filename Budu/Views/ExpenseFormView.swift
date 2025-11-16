@@ -25,18 +25,18 @@ struct ExpenseFormView: View {
                     Text("Add Expense")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                     
                     Text("Track your spending")
                         .font(.body)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
                 
                 VStack(spacing: 20) {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Title")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundStyle(.primary)
                         
                         TextField("e.g., Lunch, Gas, Coffee", text: $title)
                             .textFieldStyle(CustomTextFieldStyle())
@@ -46,7 +46,7 @@ struct ExpenseFormView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Amount")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundStyle(.primary)
                         
                         TextField("e.g., 50000", text: $amountText)
                             .keyboardType(.numberPad)
@@ -58,8 +58,7 @@ struct ExpenseFormView: View {
                 Spacer()
             }
             .padding(24)
-            .background(Color.black.ignoresSafeArea())
-            .preferredColorScheme(.dark)
+            .background(Color(uiColor: .systemBackground).ignoresSafeArea())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -69,7 +68,6 @@ struct ExpenseFormView: View {
                             dismiss()
                         }
                     }
-                    .foregroundColor(.blue)
                     .disabled(title.isEmpty || amountText.isEmpty || Double(amountText) == nil || Double(amountText) ?? 0 <= 0)
                 }
             }

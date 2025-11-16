@@ -20,17 +20,17 @@ struct BudgetFormView: View {
                     Text("Budget")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                     
                     Text("Set your budget")
                         .font(.body)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
                 
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Amount")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                     
                     TextField("Enter amount", text: $budgetText)
                         .keyboardType(.numberPad)
@@ -41,8 +41,7 @@ struct BudgetFormView: View {
                 Spacer()
             }
             .padding(24)
-            .background(Color.black.ignoresSafeArea())
-            .preferredColorScheme(.dark)
+            .background(Color(uiColor: .systemBackground).ignoresSafeArea())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -52,7 +51,6 @@ struct BudgetFormView: View {
                             dismiss()
                         }
                     }
-                    .foregroundColor(.blue)
                     .disabled(budgetText.isEmpty || Double(budgetText) == nil || Double(budgetText) ?? 0 <= 0)
                 }
             }

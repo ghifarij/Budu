@@ -19,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black
+                Color(uiColor: .systemBackground)
                     .ignoresSafeArea()
 
                 VStack(alignment: .leading, spacing: 20) {
@@ -42,7 +42,6 @@ struct ContentView: View {
                 .padding(.horizontal, 24)
                 .padding(.top, 40)
             }
-            .preferredColorScheme(.dark)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Reset") {
@@ -81,60 +80,61 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Available Balance")
                 .font(.headline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(formatCurrency(from: budgetManager.availableBalance))
-                .font(.system(size: 36, weight: .bold))
-                .foregroundColor(.white)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundStyle(.primary)
             
             Divider()
-                .background(Color.white.opacity(0.2))
+                .background(Color(uiColor: .separator))
 
             Button(action: {
                 showingHistory = true
             }) {
                 HStack {
                     Text("View History")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.body)
+                        .fontWeight(.medium)
                     Spacer()
                     Image(systemName: "arrow.right")
                 }
-                .foregroundColor(.blue)
+                .foregroundStyle(.blue)
             }
         }
         .padding()
         .background(
             ZStack {
-                Color.gray.opacity(0.1)
+                Color(uiColor: .secondarySystemBackground)
                 LinearGradient(
-                    gradient: Gradient(colors:[Color.white.opacity(0.05), Color.blue.opacity(0.05)]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+                    gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.blue.opacity(0.05)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
-                .blur(radius: 20)
             }
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                .stroke(Color(uiColor: .separator), lineWidth: 1)
         )
         .cornerRadius(12)
-        .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
-        .shadow(color: Color.white.opacity(0.1), radius: 2, x: 0, y: -1)
+        .shadow(color: Color.blue.opacity(0.2), radius: 8, x: 0, y: 4)
     }
         
     @ViewBuilder
-    private func budgetInfoView(title: String, amount: Double, color: Color = .white) -> some View {
+    private func budgetInfoView(title: String, amount: Double, color: Color? = nil) -> some View {
         HStack(spacing: 4) {
             Text(title)
                 .font(.headline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
             
             Spacer()
             
             Text(formatCurrency(from: amount))
-                .font(.system(size: 20, weight: .regular, design: .default))
-                .foregroundColor(color)
+                .font(.title3)
+                .fontWeight(.regular)
+                .foregroundStyle(color ?? .primary)
         }
         .padding(.vertical)
     }
@@ -145,41 +145,43 @@ struct ContentView: View {
             budgetInfoView(title: "Budget",
                            amount: budgetManager.currentBudget?.amount ?? 0)
             
-            Divider().background(Color.white.opacity(0.2))
+            Divider()
+                .background(Color(uiColor: .separator))
             
             budgetInfoView(title: "Expenses",
                            amount: budgetManager.totalExpenses,
                            color: .red)
         }
         .padding(.horizontal)
-        .background(Color.gray.opacity(0.1))
+        .background(Color(uiColor: .secondarySystemBackground))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                .stroke(Color(uiColor: .separator), lineWidth: 1)
         )
         .cornerRadius(12)
     }
         
     @ViewBuilder
-    private func actionsView(title: String, icon: Image, color: Color = .white, action: @escaping () -> Void) -> some View {
+    private func actionsView(title: String, icon: Image, color: Color, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 8) {
                 icon
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 20)
-                    .foregroundColor(color)
+                    .foregroundStyle(color)
                 Text(title)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
+                    .font(.body)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.primary)
             }
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.gray.opacity(0.1))
+        .background(Color(uiColor: .secondarySystemBackground))
         .overlay(
             RoundedRectangle(cornerRadius: 40)
-                .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                .stroke(Color(uiColor: .separator), lineWidth: 1)
         )
         .cornerRadius(40)
     }

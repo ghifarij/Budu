@@ -24,8 +24,7 @@ struct HistoryView: View {
                     expensesList()
                 }
             }
-            .background(Color.black.ignoresSafeArea())
-            .preferredColorScheme(.dark)
+            .background(Color(uiColor: .systemBackground).ignoresSafeArea())
             .navigationTitle("History")
             .navigationBarTitleDisplayMode(.large)
         }
@@ -36,16 +35,16 @@ struct HistoryView: View {
         VStack(spacing: 24) {
             Image(systemName: "list.bullet.clipboard")
                 .font(.system(size: 64))
-                .foregroundColor(.gray)
+                .foregroundStyle(.tertiary)
             
             Text("No Expenses Yet")
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
             
             Text("Your expense history will appear here")
                 .font(.body)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -83,27 +82,28 @@ struct ExpenseRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(expense.title)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 Text(expense.formattedDate)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
             
             Spacer()
             
             Text(formatCurrency(from: expense.amount))
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(.red)
+                .font(.body)
+                .fontWeight(.semibold)
+                .foregroundStyle(.red)
         }
         .padding()
         .background(
-            Color.gray.opacity(0.1)
+            Color(uiColor: .secondarySystemBackground)
                 .cornerRadius(12)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                .stroke(Color(uiColor: .separator), lineWidth: 1)
         )
     }
     
