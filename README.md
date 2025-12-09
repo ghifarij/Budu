@@ -33,9 +33,6 @@ A simple and elegant iOS budget tracking app built with SwiftUI. Track your mont
 - Reset all data option
 - JSON-based data encoding/decoding
 
-## Screenshots
-<img width="1024" height="1024" alt="ChatGPT Image Jul 23, 2025, 01_19_17 PM" src="https://github.com/user-attachments/assets/8b76175e-3771-4f37-9070-313cc2297799" />
-
 ## Technical Details
 
 ### Architecture
